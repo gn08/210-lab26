@@ -9,6 +9,9 @@ const int SZ_NAMES = 200, SZ_COLORS = 25;
 const int NUM_SIMULATIONS = 15;
 
 void simulate()
+void read_goats()
+void sort_goats()
+void insert_goat()
 void delete_goat(list<Goat> &trip);
 
 int main_menu();
@@ -17,17 +20,24 @@ int main() {
     srand(static_cast<unsigned int>time(0));
     bool again;
 
-    string names[SZ_NAMES];
-    string colors[SZ_COLORS];
     double times[NUM_SIMULATIONS][4][3] = {0};
 
-    for (int i = 0; i< NUM_SIMULATIONS; i++){
-        simulate(i, times);
+    for (int sim = 0; sim < NUM_SIMULATIONS; sim++){
+        list < Goat> trip;
+        int tripSize = rand() % 8 + 8;
+
+        auto start = chrono::high_resolution_clock:: now();
+        for (int i = 0; i <tripSize; i++){
+            int age = rand() % MAX_AGE;
+            string name = names[rand() % SZ_NAMES];
+            string color = colors[rand() % SZ_COLORS];
+        }
+
+
     }
 
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
-    string names[SZ_NAMES];
     int i = 0;
     while (fin >> names[i++]);
     fin.close();
