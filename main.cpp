@@ -15,7 +15,7 @@ void add_goat(list<Goat> &trip, string names[], string colors[]);
 void display_trip(const list<Goat> trip);
 
 int main() {
-    srand(static_cast<unsigned int>time(0));
+    srand(static_cast<unsigned int>(time(0)));
 
     double total_times[4][3] [NUM_SIMULATIONS]= {{{0}}};
     string names[SZ_NAMES];
@@ -63,13 +63,13 @@ int main() {
         start = chrono:: high_resolution_clock
         add_goat(trip, names, colors);
         end = chrono::high_resolution_clock::now();
-        total_times[][0] += chrono::duration_cast<chrono::microseconds>(end - start).count();
+        total_times[2][0] += chrono::duration_cast<chrono::microseconds>(end - start).count();
 
 //delete
         start = chrono:: high_resolution_clock
         delete_goat(trip);
         end = chrono::high_resolution_clock::now();
-        total_times[][0] += chrono:: duration_cast<chrono::microseconds>(end- start).count();
+        total_times[3][0] += chrono:: duration_cast<chrono::microseconds>(end- start).count();
 
     }
     
