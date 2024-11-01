@@ -7,19 +7,34 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
 const int NUM_SIMULATIONS = 15;
+const int MAX_AGE = 15;
 
-int select_goat(list<Goat> trip);
+int select_goat(const list<Goat> trip);
 void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string[], string[]);
-void display_trip(list<Goat> trip);
-
-int main_menu();
+void add_goat(list<Goat> &trip, string names[], string colors[]);
+void display_trip(const list<Goat> trip);
 
 int main() {
     srand(static_cast<unsigned int>time(0));
-    bool again;
 
-    double times[NUM_SIMULATIONS][4][3] = {0};
+    double total_times[4][3] [NUM_SIMULATIONS]= {{{0}}};
+    string names[SZ_NAMES];
+    string colors[SZ_COLORS];
+
+    // read & populate arrays for names and colors
+    ifstream fin("names.txt");
+    int i = 0;
+    while (fin >> names[i++]){
+        i++;
+    }
+    fin.close();
+
+    ifstream fin1("colors.txt");
+    i = 0;
+    while (fin1 >> colors[i++]){
+        i++;
+    }
+    fin1.close();
 
     for (int sim = 0; sim < NUM_SIMULATIONS; sim++){
         list < Goat> trip;
@@ -31,10 +46,10 @@ int main() {
             int age = rand() % MAX_AGE;
             string name = names[rand() % SZ_NAMES];
             string color = colors[rand() % SZ_COLORS];
-            trip.push_back();
+            trip.push_back(Goat(name, age, color));
         }
         auto end = chrono::high_resolution_clock::now();
-        total_times[0][0] += chrono::duration_cast<chrono::microseconds>().count();
+        total_times[0][0] += chrono::duration_cast<chrono::microseconds>(end- start).count();
 
 //sort
         start = chrono :: high_resolution_clock::now();
@@ -42,33 +57,21 @@ int main() {
             return a.get_name() < b.get_name();
         };
         end=chrono::high_resolution_clock::now();
-        total_times[1][0] += chrono::duration_cast<chrono::microseconds>().count();
+        total_times[1][0] += chrono::duration_cast<chrono::microseconds>(end- start).count();
 
 //insert 
         start = chrono:: high_resolution_clock
         add_goat(trip, names, colors);
         end = chrono::high_resolution_clock::now();
-        total_times[][0] += chrono::duration_cast<chrono::microseconds>().count();
+        total_times[][0] += chrono::duration_cast<chrono::microseconds>(end - start).count();
 
 //delete
         start = chrono:: high_resolution_clock
         delete_goat(trip);
         end = chrono::high_resolution_clock::now();
-        total_times[][0] += chrono:: duration_cast<chrono::microseconds>().count();
+        total_times[][0] += chrono:: duration_cast<chrono::microseconds>(end- start).count();
 
     }
-
-    // read & populate arrays for names and colors
-    ifstream fin("names.txt");
-    int i = 0;
-    while (fin >> names[i++]);
-    fin.close();
-
-    ifstream fin1("colors.txt");
-    string colors[SZ_COLORS];
-    i = 0;
-    while (fin1 >> colors[i++]);
-    fin1.close();
     
     cout << "Simulations: " << NUM_SIMULATIONS << endl;
     cout << "Operation      Vector      List        Set\n";
@@ -83,22 +86,6 @@ int main() {
 
 
     return 0;
-}
-
-int main_menu() {
-    cout << "*** GOAT MANAGER 3001 ***\n";
-    cout << "[1] Add a goat\n";
-    cout << "[2] Delete a goat\n";
-    cout << "[3] List goats\n";
-    cout << "[4] Quit\n";
-    cout << "Choice --> ";
-    int choice;
-    cin >> choice;
-    while (choice < 1 || choice > 4) {
-        cout << "Invalid, again --> ";
-        cin >> choice;
-    }
-    return choice;
 }
 
 void delete_goat(list<Goat> &trip) {
