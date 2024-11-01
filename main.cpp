@@ -43,8 +43,16 @@ int main() {
         end=chrono::high_resolution_clock::now();
         total_times[1][0] += chrono::duration_cast<chrono::microseconds>().count();
 
-//delete 
+//insert 
         start = chrono:: high_resolution_clock
+        add_goat(trip, names, colors);
+        end = chrono::high_resolution_clock::now();
+        total_times[][]
+//delete
+        start = chrono:: high_resolution_clock
+        delete_goat(trip);
+        end = chrono::high_resolution_clock::now();
+        total_times[][]
 
     }
 
