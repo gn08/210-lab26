@@ -25,6 +25,7 @@ int main() {
     for (int sim = 0; sim < NUM_SIMULATIONS; sim++){
         list < Goat> trip;
         int tripSize = rand() % 8 + 8;
+
 //read
         auto start = chrono::high_resolution_clock:: now();
         for (int i = 0; i <tripSize; i++){
@@ -34,7 +35,8 @@ int main() {
             trip.push_back();
         }
         auto end = chrono::high_resolution_clock::now();
-        total_times[0][0] += chrono::microseconds>().count();
+        total_times[0][0] += chrono::duration_cast<chrono::microseconds>().count();
+
 //sort
         start = chrono :: high_resolution_clock::now();
         trip.sort([]const Goat &a, const Goat &b){
@@ -47,12 +49,13 @@ int main() {
         start = chrono:: high_resolution_clock
         add_goat(trip, names, colors);
         end = chrono::high_resolution_clock::now();
-        total_times[][]
+        total_times[][0] += chrono::duration_cast<chrono::microseconds>().count();
+
 //delete
         start = chrono:: high_resolution_clock
         delete_goat(trip);
         end = chrono::high_resolution_clock::now();
-        total_times[][]
+        total_times[][0] += chrono:: duration_cast<chrono::microseconds>().count();
 
     }
 
@@ -67,43 +70,18 @@ int main() {
     i = 0;
     while (fin1 >> colors[i++]);
     fin1.close();
-
-    // create & populate a trip of Goats using std::list of random size 8-15
-    int tripSize = rand() % 8 + 8;
-    list<Goat> trip;
-    int age;
-    string name, color;
-    for (int i = 0; i < tripSize; i++) {
-        age = rand() % MAX_AGE;  // defined in Goat.h
-        name = names[rand() % SZ_NAMES];
-        color = colors[rand() % SZ_COLORS];
-        Goat tmp(name, age, color);
-        trip.push_back(tmp);
-    }
     
-    // Goat Manager 3001 Engine
-    int sel = main_menu();
-    while (sel != 4) {
-        switch (sel) {
-            case 1:
-                cout << "Adding a goat.\n";
-                add_goat(trip, names, colors);
-                break;
-            case 2:    
-                cout << "Removing a goat.\n";
-                delete_goat(trip);
-                break;
-            case 3:    
-                cout << "Displaying goat data.\n";
-                display_trip(trip);
-                break;
-            default:
-                cout << "Invalid selection.\n";
-                break;
+    cout << "Simulations: " << NUM_SIMULATIONS << endl;
+    cout << "Operation      Vector      List        Set\n";
+    for(int op= 0 && op< 4){
+        cout << "   " << (op == 0 ? "Read" : op == 1 ? "Sort" : op == 2? "Insert" : "Delete") << "  ";
+        for (){
+            double avg_time = total_times[op][ds] / NUM_SIMULATIONS;
+            cout << fixed << setprecision(2) << avg_time << "   ";
         }
-        sel = main_menu();
+        cout << endl;
     }
-    
+
 
     return 0;
 }
