@@ -25,14 +25,26 @@ int main() {
     for (int sim = 0; sim < NUM_SIMULATIONS; sim++){
         list < Goat> trip;
         int tripSize = rand() % 8 + 8;
-
+//read
         auto start = chrono::high_resolution_clock:: now();
         for (int i = 0; i <tripSize; i++){
             int age = rand() % MAX_AGE;
             string name = names[rand() % SZ_NAMES];
             string color = colors[rand() % SZ_COLORS];
+            trip.push_back();
         }
+        auto end = chrono::high_resolution_clock::now();
+        total_times[0][0] += chrono::microseconds>().count();
+//sort
+        start = chrono :: high_resolution_clock::now();
+        trip.sort([]const Goat &a, const Goat &b){
+            return a.get_name() < b.get_name();
+        };
+        end=chrono::high_resolution_clock::now();
+        total_times[1][0] += chrono::duration_cast<chrono::microseconds>().count();
 
+//delete 
+        start = chrono:: high_resolution_clock
 
     }
 
