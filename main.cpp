@@ -8,11 +8,10 @@ using namespace std;
 const int SZ_NAMES = 200, SZ_COLORS = 25;
 const int NUM_SIMULATIONS = 15;
 
-void simulate()
-void read_goats()
-void sort_goats()
-void insert_goat()
+int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
+void add_goat(list<Goat> &trip, string[], string[]);
+void display_trip(list<Goat> trip);
 
 int main_menu();
 
