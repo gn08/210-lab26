@@ -9,7 +9,6 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
 const int NUM_SIMULATIONS = 15;
-const int MAX_AGE = 15;
 
 int select_goat(const list<Goat> trip);
 void delete_goat(list<Goat> &trip);
@@ -51,7 +50,7 @@ int main() {
             trip.push_back(Goat(name, age, color));
         }
         auto end = chrono::high_resolution_clock::now();
-        total_times[0][0][sim] += static_cast<long long>(chrono::duration_cast<chrono::microseconds>(end- start).count());
+        total_times[0][0][sim] = chrono::duration_cast<chrono::microseconds>(end- start).count();
 
 //sort
         start = chrono :: high_resolution_clock::now();
@@ -80,13 +79,13 @@ int main() {
     for(int op= 0; op< 4; op++){
         cout << "   " << (op == 0 ? "Read" : op == 1 ? "Sort" : op == 2? "Insert" : "Delete") << "  ";
         for (int ds =0; ds<3; ds++){
-            double avg_time = static_cast<double>(total_times[op][ds][sim]) / NUM_SIMULATIONS;
+            double avg_time = 0.0;
             for(int sim=0; sim< NUM_SIMULATIONS; sim++){
                 avg_time += total_times[op][ds][sim];
             }
 
             avg_time /= NUM_SIMULATIONS;
-            cout << avg_time;
+            cout << setw(12) << avg_time;
         }
         cout << endl;
     }
