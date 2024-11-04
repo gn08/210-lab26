@@ -86,7 +86,7 @@ int main() {
             }
 
             avg_time /= NUM_SIMULATIONS;
-            cout 
+            cout << avg_time;
         }
         cout << endl;
     }
