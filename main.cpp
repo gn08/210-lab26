@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <list>
 #include "Goat.h"
+#include <chrono>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -17,7 +18,7 @@ void display_trip(const list<Goat> trip);
 int main() {
     srand(static_cast<unsigned int>(time(0)));
 
-    double total_times[4][3] [NUM_SIMULATIONS]= {{{0}}};
+    double total_times[4][3][NUM_SIMULATIONS]= {{{0}}};
     string names[SZ_NAMES];
     string colors[SZ_COLORS];
 
@@ -53,20 +54,20 @@ int main() {
 
 //sort
         start = chrono :: high_resolution_clock::now();
-        trip.sort([]const Goat &a, const Goat &b){
+        trip.sort([](const Goat &a, const Goat &b){
             return a.get_name() < b.get_name();
-        };
+        });
         end=chrono::high_resolution_clock::now();
         total_times[1][0] += chrono::duration_cast<chrono::microseconds>(end- start).count();
 
 //insert 
-        start = chrono:: high_resolution_clock
+        start = chrono::high_resolution_clock::now();
         add_goat(trip, names, colors);
         end = chrono::high_resolution_clock::now();
         total_times[2][0] += chrono::duration_cast<chrono::microseconds>(end - start).count();
 
 //delete
-        start = chrono:: high_resolution_clock
+        start = chrono:: high_resolution_clock::now();
         delete_goat(trip);
         end = chrono::high_resolution_clock::now();
         total_times[3][0] += chrono:: duration_cast<chrono::microseconds>(end- start).count();
@@ -78,9 +79,7 @@ int main() {
     for(int op= 0; op< 4; op++){
         cout << "   " << (op == 0 ? "Read" : op == 1 ? "Sort" : op == 2? "Insert" : "Delete") << "  ";
         for (int ds =0; ds<3; ds++){
-            double avg_time = total_times[op][ds] / NUM_SIMULATIONS;
-            cout << fixed << setprecision(2) << avg_time << "   ";
-
+            double avg_time = 0.0;
             for(int sim=0; sim< NUM_SIMULATIONS; sim++){
                 avg_time += total_times[op][ds][sim];
             }
@@ -130,7 +129,7 @@ int select_goat(list<Goat> trp) {
     display_trip(trp);
     cout << "Choice --> ";
     cin >> input;
-    while (input < 1 or input > trp.size()) {
+    while (input < 1 || input > trp.size()) {
         cout << "Invalid choice, again --> ";
         cin >> input;
     }
