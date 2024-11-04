@@ -9,10 +9,21 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
 const int NUM_SIMULATIONS = 15;
-
+//select goat
+//arguements: const list<Goat> trip- list of goats
+//return: int- selected goat position
 int select_goat(const list<Goat> trip);
+//delete goat
+//agruement- list<Goat> &trip- list of goats
+//return: nothing
 void delete_goat(list<Goat> &trip);
+// add goat
+//agruement- list<Goat> &trip- list of goats, names- names, colors- colors
+//return: nothing
 void add_goat(list<Goat> &trip, string names[], string colors[]);
+//display list goats
+//arguements- const list<Goat> trip-list of goats
+//returns: nothing
 void display_trip(const list<Goat> trip);
 
 int main() {
