@@ -24,14 +24,14 @@ int main() {
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
     int i = 0;
-    while (fin >> names[i++]){
+    while (fin >> names[i] && i < SZ_NAMES){
         i++;
     }
     fin.close();
 
     ifstream fin1("colors.txt");
     i = 0;
-    while (fin1 >> colors[i++]){
+    while (fin1 >> colors[i] && i < SZ_COLORS){
         i++;
     }
     fin1.close();
@@ -75,11 +75,18 @@ int main() {
     
     cout << "Simulations: " << NUM_SIMULATIONS << endl;
     cout << "Operation      Vector      List        Set\n";
-    for(int op= 0 && op< 4){
+    for(int op= 0; op< 4; op++){
         cout << "   " << (op == 0 ? "Read" : op == 1 ? "Sort" : op == 2? "Insert" : "Delete") << "  ";
-        for (){
+        for (int ds =0; ds<3; ds++){
             double avg_time = total_times[op][ds] / NUM_SIMULATIONS;
             cout << fixed << setprecision(2) << avg_time << "   ";
+
+            for(int sim=0; sim< NUM_SIMULATIONS; sim++){
+                avg_time += total_times[op][ds][sim];
+            }
+
+            avg_time /= NUM_SIMULATIONS;
+            cout 
         }
         cout << endl;
     }
